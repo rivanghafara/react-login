@@ -1,14 +1,32 @@
-import React, { useState } from 'react'
-import { Card, Button, Alert } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Card, Button, Alert, Table } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { db } from '../firebase'
+import Tables from './Tables'
 
 export default function Dashboard() {
   const [error, setError] = useState("")
+  const [items, setItems] = useState([])
   const { currentUser, logout } = useAuth()
   const history = useHistory()
 
-  async function handleLogout() {
+  useEffect(() => {
+    db.collection('items').onSnapshot(snapshot => (
+      setItems(snapshot.docs.map(doc => ({
+        id: doc.id,
+        item_name: doc.data().item_name,
+        item_desc: doc.data().item_desc,
+        item_price: doc.data().item_price
+      })))
+    ))
+  }, [])
+
+  function ShowAlert() {
+    alert("Hello! I am an alert box!");
+  }
+
+  async function HandleLogout() {
     setError("")
     try {
       await logout()
@@ -25,11 +43,16 @@ export default function Dashboard() {
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {currentUser.email}
           <Link to="update-profile" className="btn btn-primary w-100 mt-3"> Update Profile </Link>
+          <Link to="create-item" className="btn btn-primary w-100 mt-3"> Create New Item </Link>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>Log out</Button>
+        <Button variant="link" onClick={HandleLogout}>Log out</Button>
       </div>
+      <div className="w-100 text-center mt-2">
+        <Button variant="link" onClick={ShowAlert}>Show</Button>
+      </div>
+      <Tables items={items}/>
     </>
   )
 }
