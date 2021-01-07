@@ -25,11 +25,11 @@ export default function EditItem(props) {
     try {
       await db.collection('items').doc(props.location.itemsProps.id).update(payload)
       setMessage("Data has been saved")
-      history.push("/")
+      history.push("/manage/menu-item")
     } catch (error) {
       setError("Failed to save data")
     } finally {
-      setLoading(true)
+      setLoading(false)
     }
   }
 
@@ -57,7 +57,7 @@ export default function EditItem(props) {
               <Form.Label>Item Price</Form.Label>
               <Form.Control type="number" id="item_price" defaultValue={payload.item_price} onChange={e => setPayload({ ...payload, item_price: e.target.value })} required />
             </Form.Group>
-            <Button disable={loading.toString()} className="w-100" type="submit">Save Item</Button>
+            <Button disabled={loading} className="w-100" type="submit">Save Item</Button>
           </Form>
           <div className="w-100 text-center mt-2">
             <Link to="/">Cancel</Link>

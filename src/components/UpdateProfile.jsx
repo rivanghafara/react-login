@@ -54,7 +54,7 @@ export default function UpdateProfile() {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmationRef} placeholder="Leave blank to keep the same" />
             </Form.Group>
-            <Button disable={loading} className="w-100" type="submit">Update</Button>
+            <Button disable={loading.toString()} className="w-100" type="submit">Update</Button>
           </Form>
         </Card.Body>
       </Card>

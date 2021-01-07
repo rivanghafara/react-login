@@ -11,6 +11,8 @@ export default function AddItem() {
   const [payload, setPayload] = useState()
   const { currentUser } = useAuth()
 
+  console.log(loading);
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -23,7 +25,7 @@ export default function AddItem() {
     } catch (error) {
       setError("Failed to save data")
     } finally {
-      setLoading(true)
+      setLoading(false)
     }
   }
 
@@ -45,16 +47,18 @@ export default function AddItem() {
             </Form.Group>
             <Form.Group id="text">
               <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" rows={3} onChange={e => setPayload({...payload, item_desc: e.target.value})}/>
+              <Form.Control as="textarea" rows={3} onChange={e => setPayload({ ...payload, item_desc: e.target.value })} />
             </Form.Group>
             <Form.Group id="priceTag">
               <Form.Label>Item Price</Form.Label>
               <Form.Control type="number" id="item_price" onChange={e => setPayload({ ...payload, item_price: e.target.value })} required />
             </Form.Group>
-            <Button disable={loading.toString()} className="w-100" type="submit">Save Item</Button>
+            <Button disabled={loading} className="w-100" type="submit">Save Item</Button>
           </Form>
           <div className="w-100 text-center mt-2">
-            <Link to="/">Cancel</Link>
+            <Button variant="link" disabled={loading}>
+              <Link to="/manage/menu-item" >Cancel</Link>
+            </Button>
           </div>
         </Card.Body>
       </Card>
