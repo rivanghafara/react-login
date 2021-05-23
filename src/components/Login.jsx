@@ -13,15 +13,14 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    try {
-      setError('')
-      setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      history.push('/')
-    } catch (error) {
-      return setError('Failed to sign in')
-    }
-
+      try {
+        setError('')
+        setLoading(true)
+        await login(emailRef.current.value, passwordRef.current.value)
+        history.push('/')
+      } catch (error) {
+        return setError('Failed to sign in')
+      }
   }
 
   return (

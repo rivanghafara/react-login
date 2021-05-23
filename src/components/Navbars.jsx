@@ -5,7 +5,12 @@ import { Link, useHistory } from 'react-router-dom'
 
 export default function Navbars() {
   const { currentUser, logout } = useAuth()
+  const history = useHistory()
   
+  if (currentUser === null) {
+    
+  }
+
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -13,20 +18,23 @@ export default function Navbars() {
           <Nav.Item>
             <Nav.Link href="/">Dashboard</Nav.Link>
           </Nav.Item>
-          <NavDropdown title="Manage" id="basic-nav-dropdown">
+          <Nav.Item>
+            <Nav.Link href="/manage/menu-item">Menu</Nav.Link>
+          </Nav.Item>
+          {/* <NavDropdown title="Manage" id="basic-nav-dropdown">
             <NavDropdown.Item href="/manage/menu-item">Menu</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">Employee</NavDropdown.Item>
+            <NavDropdown.Item href="/manage/employee-item">Employee</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.3">Finance</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/manage/my-profile">My Profile</NavDropdown.Item>
-          </NavDropdown>
+          </NavDropdown> */}
           <Nav.Item>
             <Nav.Link eventKey="disabled" disabled>Disabled</Nav.Link>
           </Nav.Item>
         </Nav>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <Link to="/manage/my-profile">{currentUser.email}</Link>
+            {currentUser === null ? <Nav.Link disable="false" href="/login">Login</Nav.Link> : <Link to="/manage/my-profile" disable="false">{currentUser.email}</Link>}
           </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
