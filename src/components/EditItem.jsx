@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { Link, useParams, useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
@@ -10,20 +10,22 @@ export default function EditItem(props) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
-  const [payload, setPayload] = useState({
-    item_name: props.location.itemsProps.item_name,
-    item_price: props.location.itemsProps.item_price,
-    item_desc: props.location.itemsProps.item_desc
-  })
+  const [payload, setPayload] = useState()
   const { currentUser } = useAuth()
-  
+
+  useEffect(() => {
+    if (id) {
+      db.collection('items').doc(id).onSnapshot((snapshot) => { setPayload(snapshot.data()) })
+    }
+  }, [id])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setMessage('')
     setError('')
     try {
-      await db.collection('items').doc(props.location.itemsProps.id).update(payload)
+      await db.collection('items').doc(id).update(payload)
       setMessage("Data has been saved")
       history.push("/manage/menu-item")
     } catch (error) {
@@ -35,7 +37,7 @@ export default function EditItem(props) {
 
   return (
     <>
-      <Card>
+      {(typeof payload === 'undefined') ? <h2>Loading...</h2> : <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Edit item</h2>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -60,10 +62,10 @@ export default function EditItem(props) {
             <Button disabled={loading} className="w-100" type="submit">Save Item</Button>
           </Form>
           <div className="w-100 text-center mt-2">
-            <Link to="/">Cancel</Link>
+            <Link to="/manage/menu-item">Cancel</Link>
           </div>
         </Card.Body>
-      </Card>
+      </Card>}
     </>
   )
 }
