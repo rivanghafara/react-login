@@ -21,16 +21,6 @@ export default function Navbars() {
           <Nav.Item>
             <Nav.Link href="/manage/menu-item">Menu</Nav.Link>
           </Nav.Item>
-          {/* <NavDropdown title="Manage" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/manage/menu-item">Menu</NavDropdown.Item>
-            <NavDropdown.Item href="/manage/employee-item">Employee</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Finance</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="/manage/my-profile">My Profile</NavDropdown.Item>
-          </NavDropdown> */}
-          <Nav.Item>
-            <Nav.Link eventKey="disabled" disabled>Disabled</Nav.Link>
-          </Nav.Item>
         </Nav>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>

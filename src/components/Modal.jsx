@@ -4,7 +4,6 @@ import { db } from '../firebase';
 
 
 export default function CenteredModal(props) {
-  console.log(props.payload);
   const initialState = {
     name: props.payload.name,
     auth: props.payload.role,
@@ -19,15 +18,6 @@ export default function CenteredModal(props) {
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
-    console.log("ini payload: ", payload);
-    // try {
-    //   await db.collection('employess').doc(props.payload.id).update(payload)
-    //   setMessage('Data has been saved')
-    // } catch (error) {
-    //   setError('Failed to save data')
-    // } finally {
-    //   setLoading(false)
-    // }
   }
 
   return (

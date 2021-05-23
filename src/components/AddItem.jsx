@@ -11,8 +11,6 @@ export default function AddItem() {
   const [payload, setPayload] = useState()
   const { currentUser } = useAuth()
 
-  console.log(loading);
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)

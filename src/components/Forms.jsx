@@ -2,7 +2,6 @@ import React from 'react'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 
 export default function Forms(props) {
-  console.log(props);
   return (
     <>
       <Form.Group id={props.id}>
