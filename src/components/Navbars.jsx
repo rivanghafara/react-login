@@ -1,16 +1,10 @@
 import React from 'react'
-import { Nav, Form, Button, FormControl, NavDropdown, Navbar } from 'react-bootstrap'
+import { Nav, Navbar } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function Navbars() {
-  const { currentUser, logout } = useAuth()
-  const history = useHistory()
-  
-  if (currentUser === null) {
-    
-  }
-
+  const { currentUser } = useAuth()
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg">

@@ -7,13 +7,17 @@ export default function UpdateProfile() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmationRef = useRef()
-  const { currentUser, updateEmail, updatePassword } = useAuth()
+  const { currentUser, updateEmail, updatePassword, logout } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
 
+  console.log(currentUser);
+
   function handleSubmit(e) {
     e.preventDefault()
+
+    console.log(emailRef.current.value, passwordRef.current.value);
 
     const promises = []
     setError('')
@@ -28,11 +32,14 @@ export default function UpdateProfile() {
 
     Promise.all(promises).then(() => {
       history.push('/')
-    }).catch(() => {
+    }).catch((err) => {
+      console.log(err);
       setError('Failed to update profile')
     }).finally(() => {
       setLoading(false)
     })
+
+    return
   }
 
   return (
@@ -54,7 +61,7 @@ export default function UpdateProfile() {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmationRef} placeholder="Leave blank to keep the same" />
             </Form.Group>
-            <Button disable={loading.toString()} className="w-100" type="submit">Update</Button>
+            <Button disable={(loading === true) ? "true": "false"} className="w-100" type="submit">Update</Button>
           </Form>
         </Card.Body>
       </Card>

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Button, Alert, CardGroup, Row, Col } from 'react-bootstrap'
+import { Card, Button, Alert } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { db } from '../firebase'
-import Cards from './Cards'
-import MenuItem from './MenuItem'
 
 export default function Dashboard() {
   const [error, setError] = useState("")

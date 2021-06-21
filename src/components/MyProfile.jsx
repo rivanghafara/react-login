@@ -1,25 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Card, Button, Alert, CardGroup, Row, Col } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Card, Button, Alert } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { db } from '../firebase'
 
 export default function MyProfile() {
   const [error, setError] = useState("")
-  const [items, setItems] = useState([])
   const { currentUser, logout } = useAuth()
   const history = useHistory()
-
-  useEffect(() => {
-    db.collection('items').onSnapshot(snapshot => (
-      setItems(snapshot.docs.map(doc => ({
-        id: doc.id,
-        item_name: doc.data().item_name,
-        item_desc: doc.data().item_desc,
-        item_price: doc.data().item_price
-      })))
-    ))
-  }, [])
 
   async function HandleLogout() {
     setError("")
@@ -37,7 +24,7 @@ export default function MyProfile() {
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {currentUser.email}
-          <Link exact to="/update-profile" className="btn btn-primary w-100 mt-3"> Update Profile </Link>
+          <Link exact={true.toString()} to="/update-profile" className="btn btn-primary w-100 mt-3"> Update Profile </Link>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">

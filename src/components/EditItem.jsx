@@ -4,7 +4,7 @@ import { Link, useParams, useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { db } from '../firebase'
 
-export default function EditItem(props) {
+export default function EditItem() {
   let { id } = useParams()
   const history = useHistory()
   const [loading, setLoading] = useState(false)
@@ -13,11 +13,15 @@ export default function EditItem(props) {
   const [payload, setPayload] = useState()
   const { currentUser } = useAuth()
 
+
   useEffect(() => {
-    if (id) {
-      db.collection('items').doc(id).onSnapshot((snapshot) => { setPayload(snapshot.data()) })
+    const fetch = async () => {
+      return await db.collection('items').doc(id).onSnapshot((snapshot) => { setPayload(snapshot.data()) })
     }
+    fetch()
   }, [id])
+
+  if (typeof payload === 'undefined') return (<h2>No Data...</h2>)
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -38,7 +38,7 @@ export default function Login() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <Button disable={loading} className="w-100" type="submit">Login</Button>
+            <Button disable={(loading === true) ? "true": "false"} className="w-100" type="submit">Login</Button>
           </Form>
           <div className="w-100 text-center mt-2">
             <Link to="/forgot-password">Forgot password?</Link>

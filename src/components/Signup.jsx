@@ -45,7 +45,7 @@ export default function Signup() {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmationRef} required />
             </Form.Group>
-            <Button disable={loading} className="w-100" type="submit">I want to join</Button>
+            <Button disable={(loading === true) ? "true": "false"} className="w-100" type="submit">I want to join</Button>
           </Form>
         </Card.Body>
       </Card>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, Button, Row, Col } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { db } from '../firebase'
 
@@ -38,7 +38,7 @@ export default function Cards({ props }) {
           }}>
             <Button variant="success" className="mr-3 mt-3">Edit item</Button>
           </Link>
-          <Button className="mt-3" disable={loading.toString()} variant="danger" onClick={e => (handleDelete(e, props.id))}>Del</Button>
+          <Button className="mt-3" disable={(loading === true) ? "true": "false"} variant="danger" onClick={e => (handleDelete(e, props.id))}>Del</Button>
         </Card.Body>
       </Card>
     </>

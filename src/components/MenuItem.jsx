@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Button, Alert, CardGroup, Row, Col } from 'react-bootstrap'
-import { Link, useHistory } from 'react-router-dom'
+import { Card, CardGroup, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import Cards from './Cards'
 import { db } from '../firebase'
 
