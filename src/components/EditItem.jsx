@@ -31,11 +31,11 @@ export default function EditItem() {
     try {
       await db.collection('items').doc(id).update(payload)
       setMessage("Data has been saved")
-      history.push("/manage/menu-item")
     } catch (error) {
       setError("Failed to save data")
     } finally {
       setLoading(false)
+      history.push("/manage/menu-item")
     }
   }
 
@@ -53,7 +53,7 @@ export default function EditItem() {
             </Form.Group>
             <Form.Group id="itemName">
               <Form.Label>Item Name</Form.Label>
-              <Form.Control type="text" id="item_name" defaultValue={payload.item_name} onChange={e => setPayload({ ...payload, item_name: e.target.value })} />
+              <Form.Control type="text" id="item_name" required defaultValue={payload.item_name} onChange={e => setPayload({ ...payload, item_name: e.target.value })} />
             </Form.Group>
             <Form.Group id="text">
               <Form.Label>Description</Form.Label>
@@ -61,7 +61,7 @@ export default function EditItem() {
             </Form.Group>
             <Form.Group id="priceTag">
               <Form.Label>Item Price</Form.Label>
-              <Form.Control type="number" id="item_price" defaultValue={payload.item_price} onChange={e => setPayload({ ...payload, item_price: e.target.value })} required />
+              <Form.Control type="number" id="item_price" required defaultValue={payload.item_price} onChange={e => setPayload({ ...payload, item_price: e.target.value })} required />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">Save Item</Button>
           </Form>
